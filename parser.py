@@ -8,6 +8,11 @@ import sys
 
 from ast import *
 
+from program import *
+from declaraitons import *
+from ifStatement import *
+from whileStatement import *
+
 
 class Parser:
     '''
@@ -80,11 +85,40 @@ class Parser:
         '''
         Parses a program which is a succession of assignments.
         '''
-        program_node = ProgramNode()
+        program_node = Program()
+        '''
         while(len(self.lexems) > 0):
             assignment = self.parse_assignment()
             program_node.assignments.append(assignment)
+        '''
+        declarations = self.parse_declarations()
+        program_node.setDeclarations(declarations)
+        #statements = self.parse_statements()
+        #program_node.setStatements(statements)
+
+
         return program_node
+
+    def parse_type(self):
+        token = self.expect('TYPE')
+
+    def parse_declaration(self):
+        declaration = Declaration()
+        declaration.type = parse_type()
+        declaration.identifier = parse_variable()
+        declaration.integer = parse_integer()
+        self.expect('TERMINATOR')
+        return declaration
+
+
+    def parse_declarations(self):
+        declarations_node = Declarations()
+        while( self.peek().tag == 'TYPE'):
+            declarations_node.addDeclaration(parse_declaration)
+        return declarations_node
+
+    def parse_statements(self):
+        statements_node = Statements()
 
 
     def parse_assignment(self):
