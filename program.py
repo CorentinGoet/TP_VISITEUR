@@ -1,15 +1,24 @@
-import ast
-
-
 class Program():
     '''
        Class representation of ProgramNode
     '''
 
     def __init__(self):
-        self.declarations = []
-        self.statements = []
+        self.__declarations = []
+        self.__statements = []
+
+    def setDeclarations(self, declarations):
+        self.__declarations = declarations
+
+    def setStatements(self, statements):
+        self.__statements = statements
+
+    def getDeclarations(self):
+        return self.__declarations
+
+    def getStatements(self):
+        return self.__statements
+
 
     def accept(self, visitor):
         visitor.visitProgram(self)
-
