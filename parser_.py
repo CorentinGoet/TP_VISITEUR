@@ -113,7 +113,7 @@ class Parser:
     def parse_declaration(self):
         declaration = Declaration()
         declaration.type = self.parse_type()
-        declaration.identifier = self.parse_variable()
+        declaration.identifier = self.parse_variable().name
         declaration.integer = self.parse_number()
         self.expect('TERMINATOR')
         return declaration
