@@ -9,7 +9,9 @@ import sys
 from ast import *
 
 from program import *
-from declaraitons import *
+from declarations import *
+from declaration import *
+from statements import *
 from ifStatement import *
 from whileStatement import *
 
@@ -91,10 +93,16 @@ class Parser:
             assignment = self.parse_assignment()
             program_node.assignments.append(assignment)
         '''
+        self.expect('TYPE')
+        self.expect('MAIN')
+        self.expect('L_PARENTHESIS')
+        self.expect('R_PARENTHESIS')
+        self.expect('L_CURLYBRACKET')
         declarations = self.parse_declarations()
         program_node.setDeclarations(declarations)
         #statements = self.parse_statements()
         #program_node.setStatements(statements)
+        self.expect('R_CURLYBRACKET')
 
 
         return program_node
@@ -104,9 +112,9 @@ class Parser:
 
     def parse_declaration(self):
         declaration = Declaration()
-        declaration.type = parse_type()
-        declaration.identifier = parse_variable()
-        declaration.integer = parse_integer()
+        declaration.type = self.parse_type()
+        declaration.identifier = self.parse_variable()
+        declaration.integer = self.parse_number()
         self.expect('TERMINATOR')
         return declaration
 
@@ -114,7 +122,7 @@ class Parser:
     def parse_declarations(self):
         declarations_node = Declarations()
         while( self.peek().tag == 'TYPE'):
-            declarations_node.addDeclaration(parse_declaration)
+            declarations_node.addDeclaration(self.parse_declaration())
         return declarations_node
 
     def parse_statements(self):

@@ -2,6 +2,9 @@
 @author Corentin Goetghebeur (github.com/CorentinGoet)
 """
 import ast
+from mini_c_lexer import Lexer
+from parser_ import Parser
+
 
 class Visiteur:
     def init(self):
@@ -28,6 +31,10 @@ if __name__ == '__main__':
     src = file.readlines()
     lex = Lexer()
     lex.lex(src)
+    p = Parser()
+    ast = p.parse(lex.lexems)
+    visitor = Visiteur()
+    visitor.visitProgram(ast)
 
 
 

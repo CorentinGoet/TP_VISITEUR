@@ -9,7 +9,7 @@ class Declaration:
     Class representation of a Declaration.
     """
 
-    def __init__(self, type, identifier, integer=None):
+    def __init__(self, type=None, identifier=None, integer=None):
         self.type = type
         self.identifier = identifier
         self.integer = integer
