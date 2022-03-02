@@ -24,6 +24,8 @@ class Visiteur:
 
 
 if __name__ == '__main__':
-
-
-    pass
+    file = open("test_minic.txt")
+    src = file.readlines()
+    lex = Lexer()
+    lex.lex(src)
+    print(lex.lexems)

@@ -1,25 +1,18 @@
-# -*- coding: utf-8 -*-
 """
-Created on Wed Feb 16 17:55:55 2022
-@author: Quentin Ducasse
+@author Corentin Goetghebeur (github.com/CorentinGoet)
 """
 
-
-import re
 import sys
+import re
 
 regexExpressions = [
-    # mini c
+    (r'main()', 'MAIN'),
+
+    # Special chars
     (r'\(', 'L_PARENTHESIS'),
     (r'\)', 'R_PARENTHESIS'),
     (r'\{', 'L_CURLYBRACKET'),
     (r'\}', 'R_CURLYBRACKET'),
-
-    # Comments and whitespaces
-    (r'\/\/[\s\S]*\n', 'COMMENT'),
-    (r'[ \n\t]+', None),
-
-    # Special characters
     (r'\;', 'TERMINATOR'),
     (r'\=', 'ASSIGN'),
     (r'\+', 'ADDITION'),
@@ -27,9 +20,13 @@ regexExpressions = [
     (r'\*', 'MULTIPLICATION'),
     (r'\/', 'DIVISION'),
 
-    # Identifiers & Integers
-    (r'[a-zA-Z]\w*', 'VARIABLE'),
-    (r'\d+',         'NUMBER'),
+    # End of line
+    (r'[ \n\t]+', None),
+
+    # Types
+    (r'(int|bool|char|float)\s', 'TYPE'),
+    (r'([a-zA-Z](\d|[a-zA-Z])*)\s', 'VARIABLE'),
+    (r'\d+', 'NUMBER')
 ]
 
 
@@ -57,7 +54,6 @@ class Lexem:
     def __repr__(self):
         return self.tag
 
-
 class Lexer:
     '''
     Component in charge of the transformation of raw data to lexems.
@@ -77,30 +73,36 @@ class Lexer:
         SEE lexem for more info
         '''
         # Crawl through the input file
-        lineNumber = 0
-        for line in inputText:
-            lineNumber += 1
-            position = 0
-            # Crawl through the line
+        for lineNumber, line in enumerate(inputText):
+            lineNumber += 1     # Numéro de ligne
+            position = 0        # Position du caractère en cours de lecture sur la ligne
+
+            # go through the line
             while position < len(line):
+
                 match = None
                 for lexemRegex in regexExpressions:
                     pattern, tag = lexemRegex
-                    regex = re.compile(pattern)
+                    regex = re.compile(pattern)     # Transforms the string into a regex pattern object
                     match = regex.match(line, position)
                     if match:
+                        # if the match was successful
                         data = match.group(0)
-                        # This condition is needed to avoid the creation of whitespace lexems
                         if tag:
                             lexem = Lexem(tag, data, [lineNumber, position])
                             self.lexems.append(lexem)
-                        # Renew the position
                         position = match.end(0)
                         break
-                # No match detected --> Wrong syntax in the input file
+                # no matches in the line
                 if not match:
                     print("No match detected on line and position:")
                     print(line[position:])
                     sys.exit(1)
 
-        return self.lexems
+
+
+
+
+
+if __name__ == '__main__':
+    pass
