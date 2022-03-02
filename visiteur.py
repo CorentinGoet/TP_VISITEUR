@@ -12,4 +12,6 @@ if __name__ == '__main__':
     src = file.readlines()
     lex = Lexer()
     lex.lex(src)
-    print(lex.lexems)
+
+
+

@@ -6,7 +6,7 @@ import sys
 import re
 
 regexExpressions = [
-    (r'main()', 'MAIN'),
+    (r'main', 'MAIN'),
 
     # Special chars
     (r'\(', 'L_PARENTHESIS'),
