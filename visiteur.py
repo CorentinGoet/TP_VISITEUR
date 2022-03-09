@@ -35,7 +35,7 @@ if __name__ == '__main__':
     p = Parser()
     ast = p.parse(lex.lexems)
     visitor = Visiteur()
-    print(ast.accept(visitor));
+    print(ast.accept(visitor))
 
 
 
