@@ -13,12 +13,15 @@ regexExpressions = [
     (r'\)', 'R_PARENTHESIS'),
     (r'\{', 'L_CURLYBRACKET'),
     (r'\}', 'R_CURLYBRACKET'),
+    (r'\[', 'L_BRACKET'),
+    (r'\]', 'R_BRACKET'),
     (r'\;', 'TERMINATOR'),
     (r'\=', 'ASSIGN'),
     (r'\+', 'ADDITION'),
     (r'\-', 'SUBTRACTION'),
     (r'\*', 'MULTIPLICATION'),
     (r'\/', 'DIVISION'),
+
 
     # End of line
     (r'[ \n\t]+', None),

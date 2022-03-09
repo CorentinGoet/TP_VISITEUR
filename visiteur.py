@@ -12,7 +12,7 @@ class Visiteur:
 
     def visitProgram(self, program):
         vDec = program.getDeclarations().accept(self)
-        return "Program{\n\t" + vDec + "}\n"
+        return "Program{\n" + vDec + "}\n"
 
     def visitDeclarations(self, declarations):
         tmplist = ""
@@ -22,10 +22,14 @@ class Visiteur:
 
     def visitDeclaration(self, declaration):
         strTyp = declaration.type.accept(self)
-        return strTyp + " " + str(declaration.identifier) + "\n"
+        if(declaration.integer == None):
+            return strTyp + " " + str(declaration.identifier) + "\n"
+        else:
+            return strTyp + " " + str(declaration.identifier) + "[" + str(declaration.integer.value) + "]\n"
 
     def visitType(self, type):
         return type.getValue()
+
 
 if __name__ == '__main__':
     file = open("test_minic.txt")

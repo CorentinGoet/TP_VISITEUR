@@ -15,6 +15,7 @@ from mini_c_grammar.statements import Statements
 from mini_c_grammar.whileStatement import WhileStatement
 from mini_c_grammar.IfStatement import IfStatement
 from mini_c_grammar.type import Type
+from mini_c_grammar.number import Number
 
 
 class Parser:
@@ -118,8 +119,14 @@ class Parser:
         declaration = Declaration()
         declaration.type = self.parse_type()
         declaration.identifier = self.parse_variable().name
-        declaration.integer = self.parse_number()
+
+        if self.peek().tag == 'L_BRACKET':
+            print("COUCOU")
+            self.expect('L_BRACKET')
+            declaration.integer = self.parse_number()
+            self.expect('R_BRACKET')
         self.expect('TERMINATOR')
+
         return declaration
 
 
@@ -195,7 +202,7 @@ class Parser:
         Parses a number that looks like:
             Digit, {Digit}
         '''
-        number_node = NumberNode()
+        number_node = Number()
         token = self.expect('NUMBER')
-        number_node.name = token.value
+        number_node.value = token.value
         return number_node
