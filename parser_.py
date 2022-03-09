@@ -8,12 +8,12 @@ import sys
 
 from ast import *
 
-from program import *
-from declarations import *
-from declaration import *
-from statements import *
-from ifStatement import *
-from whileStatement import *
+from mini_c_grammar.declarations import Declarations
+from mini_c_grammar.program import Program
+from mini_c_grammar.declaration import Declaration
+from mini_c_grammar.statements import Statements
+from mini_c_grammar.whileStatement import WhileStatement
+from mini_c_grammar.IfStatement import IfStatement
 
 
 class Parser:
