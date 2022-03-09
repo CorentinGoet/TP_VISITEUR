@@ -11,20 +11,18 @@ class Visiteur:
         pass
 
     def visitProgram(self, program):
-        print("Program{")
+        vDec = self.visitDeclarations(program.getDeclarations())
+        return "Program{\n\t" + vDec + "}\n"
         self.visitDeclarations(program.getDeclarations())
-        #self.visitStatements(program.getDeclarations())
-        print("}\n")
 
     def visitDeclarations(self, declarations):
-        print("Declarations{")
+        tmplist = ""
         for d in declarations.declaration:
-            self.visitDeclaration(d)
-        print("}\n")
+            tmplist += (self.visitDeclaration(d) + "\n")
+        return tmplist
 
     def visitDeclaration(self, declaration):
-        print("Declaration{Type:" + str(declaration.type) + "|Identifier:" + str(declaration.identifier)+"\n");
-
+        return str(declaration.type) + " " + str(declaration.identifier) + "\n"
 
 if __name__ == '__main__':
     file = open("test_minic.txt")
@@ -34,7 +32,7 @@ if __name__ == '__main__':
     p = Parser()
     ast = p.parse(lex.lexems)
     visitor = Visiteur()
-    visitor.visitProgram(ast)
+    print(visitor.visitProgram(ast))
 
 
 
