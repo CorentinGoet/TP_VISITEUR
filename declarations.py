@@ -13,7 +13,7 @@ class Declarations:
         self.declaration = []
 
     def accept(self, visitor):
-        visitor.visitDeclarations(self)
+        return visitor.visitDeclarations(self)
 
     def addDeclaration(self, declaration):
         self.declaration.append(declaration)

@@ -11,14 +11,13 @@ class Visiteur:
         pass
 
     def visitProgram(self, program):
-        vDec = self.visitDeclarations(program.getDeclarations())
+        vDec = program.getDeclarations().accept(self)
         return "Program{\n\t" + vDec + "}\n"
-        self.visitDeclarations(program.getDeclarations())
 
     def visitDeclarations(self, declarations):
         tmplist = ""
         for d in declarations.declaration:
-            tmplist += (self.visitDeclaration(d) + "\n")
+            tmplist += (d.accept(self) + "\n")
         return tmplist
 
     def visitDeclaration(self, declaration):
@@ -32,7 +31,7 @@ if __name__ == '__main__':
     p = Parser()
     ast = p.parse(lex.lexems)
     visitor = Visiteur()
-    print(visitor.visitProgram(ast))
+    print(ast.accept(visitor));
 
 
 

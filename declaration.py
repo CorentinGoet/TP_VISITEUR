@@ -20,7 +20,7 @@ class Declaration:
         :param visitor: visitor
         :return: None
         """
-        visitor.visitDeclaration(self)
+        return visitor.visitDeclaration(self)
 
 
 
