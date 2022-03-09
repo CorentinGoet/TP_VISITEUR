@@ -4,6 +4,7 @@
 
 import ast
 
+
 class Declarations:
     """
     Class representation of the Declarations Node.

@@ -1,4 +1,4 @@
-class ifStatement():
+class IfStatement:
     '''
        Class representation of IfStatement
     '''
