@@ -25,7 +25,7 @@ regexExpressions = [
 
     # Types
     (r'(int|bool|char|float)\s', 'TYPE'),
-    (r'([a-zA-Z](\d|[a-zA-Z])*)\s', 'VARIABLE'),
+    (r'([a-zA-Z](\d|[a-zA-Z])*)', 'VARIABLE'),
     (r'\d+', 'NUMBER')
 ]
 
