@@ -21,4 +21,4 @@ class Program():
 
 
     def accept(self, visitor):
-        visitor.visitProgram(self)
+        return visitor.visitProgram(self)
