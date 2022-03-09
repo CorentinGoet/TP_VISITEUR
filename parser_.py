@@ -14,6 +14,7 @@ from mini_c_grammar.declaration import Declaration
 from mini_c_grammar.statements import Statements
 from mini_c_grammar.whileStatement import WhileStatement
 from mini_c_grammar.IfStatement import IfStatement
+from mini_c_grammar.type import Type
 
 
 class Parser:
@@ -108,7 +109,10 @@ class Parser:
         return program_node
 
     def parse_type(self):
+        type = Type()
         token = self.expect('TYPE')
+        type.setValue(token.value)
+        return type
 
     def parse_declaration(self):
         declaration = Declaration()

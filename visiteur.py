@@ -21,7 +21,11 @@ class Visiteur:
         return tmplist
 
     def visitDeclaration(self, declaration):
-        return str(declaration.type) + " " + str(declaration.identifier) + "\n"
+        strTyp = declaration.type.accept(self)
+        return strTyp + " " + str(declaration.identifier) + "\n"
+
+    def visitType(self, type):
+        return type.getValue()
 
 if __name__ == '__main__':
     file = open("test_minic.txt")
